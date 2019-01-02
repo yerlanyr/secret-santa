@@ -1,0 +1,21 @@
+{
+  "name": "secret-santa",
+  "version": "1.0.0",
+  "description": "An app to do a secret santa\r Basically i'm gonna create an app using vanilla JS as possible using modern web components targeting only modern chrome browser.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Ahaha no\" && exit 1",
+    "start": "webpack --config webpack.config.js --mode development --watch",
+    "start1": "webpack"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "html-webpack-plugin": "^3.2.0",
+    "raw-loader": "^1.0.0",
+    "style-loader": "^0.23.1",
+    "webpack": "^4.28.3",
+    "webpack-cli": "^3.1.2"
+  }
+}
