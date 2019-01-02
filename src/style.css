@@ -1,50 +1,59 @@
-        .heading{
-            font-family: 'Dancing Script', cursive;
-            font-size: 60px;
-            text-align: center;
-        }
-        .main-page--buttons{
-            text-align: center;
-            word-spacing: 10px;
-        }
-        body{
-            font-family: 'Raleway', sans-serif;
-            font-size: 16px;
-            box-sizing: border-box;
-        }
-        body * {
-            box-sizing: inherit;
-        }
-        .button{
-            font-family: 'Raleway', sans-serif;
-            font-size: 16px;
-            padding: 10px 15px;
-            border-radius: 3px;
-            border-style:none;
-            box-shadow: 0 2px 3px silver;
-        }
-        .input{
-            font-family: 'Raleway', sans-serif;
-            font-size: 16px;
-            padding: 10px 15px;
-            border: 1px solid silver;
-            border-radius: 3px;
-        }
-        .form{
-            max-width: 370px;
-            margin: 0 auto;
-        }
-        .container{
-            max-width: 400px;
-            margin: 0 auto;
-        }
-        .subheading{
-            font-family: 'Dancing Script', cursive;
-            border-bottom: 1px solid rgba(137, 43, 226, 0.425);
-        }
-        .message{
-            background: rgba(146, 175, 146, 0.479);
-            padding: 10px 15px;
-            font-family: 'Dancing Script', cursive;
-            text-align: center;
-        }
+.heading{
+    font-family: 'Dancing Script', cursive;
+    font-size: 60px;
+    text-align: center;
+}
+.main-page--buttons{
+    text-align: center;
+    word-spacing: 10px;
+}
+body{
+    font-family: 'Raleway', sans-serif;
+    font-size: 16px;
+    box-sizing: border-box;
+}
+body * {
+    box-sizing: inherit;
+}
+.button{
+    font-family: 'Raleway', sans-serif;
+    font-size: 16px;
+    padding: 10px 15px;
+    border-radius: 3px;
+    border-style:none;
+    box-shadow: 0 2px 3px silver;
+}
+.input{
+    font-family: 'Raleway', sans-serif;
+    font-size: 16px;
+    padding: 10px 15px;
+    border: 1px solid silver;
+    border-radius: 3px;
+}
+.form{
+    max-width: 370px;
+    margin: 0 auto;
+}
+.container{
+    max-width: 400px;
+    margin: 0 auto;
+}
+#content{
+    max-width: 1200px;
+    margin: 0 auto;
+}
+.subheading{
+    font-family: 'Dancing Script', cursive;
+    border-bottom: 1px solid rgba(137, 43, 226, 0.425);
+}
+.message{
+    background: rgba(146, 175, 146, 0.479);
+    padding: 10px 15px;
+    font-family: 'Dancing Script', cursive;
+    text-align: center;
+}
+.invalid-input-alert{
+    color: red;
+    display: inline-block;
+    font-size: .8em;
+}

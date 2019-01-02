@@ -1,17 +1,22 @@
-export default (navigate) => customElements.define('main-page', class extends HTMLElement {
+export default (navigate, store) => customElements.define('main-page', class extends HTMLElement {
     connectedCallback(){
-        this._updateRendering();
-        
+        this._updateRendering(store.getState());
+        this._unsubscribe = store.subscribe(() => {
+            this._updateRendering(store.getState());
+        });
+    }
+    disconnectedCallback(){
+        this._unsubscribe();
     }
     _click(s, f) {
-        this.querySelector(s).addEventListener('click', f);
+        this.querySelector(s) && this.querySelector(s).addEventListener('click', f);
     }
-    _updateRendering(){
+    _updateRendering({roomName}){
         this.innerHTML = `
         <h1 class="heading">Secret santa</h1>
         <div class="main-page--buttons">
-        <button class="button create">create</button>
-        <button class="button join">join</button>
+        ${roomName ? `<button class="button enter-room">enter room</button>`: `<button class="button create">create</button>
+        <button class="button join">join</button>`}
     </div>
         `;
         this._click('.create', () => {
@@ -20,5 +25,8 @@ export default (navigate) => customElements.define('main-page', class extends HT
         this._click('.join', () => {
             navigate('/join');
         });
+        this._click('.enter-room', () => {
+            navigate('/room');
+        })
     }
 });
