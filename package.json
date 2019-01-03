@@ -6,7 +6,9 @@
   "scripts": {
     "test": "mocha",
     "start": "webpack --config webpack.config.js --mode development --watch",
-    "start-server": "set DEBUG=express:* & node server/index.js"
+    "start-prod": "npm run build & mocha & node server/index.js",
+    "start-server": "set DEBUG=express:* & node server/index.js",
+    "build": "webpack --config webpack.config.js --mode production"
   },
   "keywords": [],
   "author": "",

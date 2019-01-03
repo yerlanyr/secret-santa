@@ -10,7 +10,7 @@ const userNames = {};
 io.on('connection', (socket) => {
     console.log('connect', socket.id);
     
-    const joinAndCreateRoomEvent = (roomName, userName, fno) => {
+    const joinRoomEvent = (roomName, userName, fno) => {
         socket.join(roomName, () => {
             io.in(roomName).clients((error, clientIds) => {
                 if(error) throw error;
@@ -25,14 +25,17 @@ io.on('connection', (socket) => {
         userNames[socket.id] = userName;
         console.log(socket.id)
         if(io.sockets.adapter.rooms[roomName]){
-            // we need to stop 
             throw new Error('name has been taken');
         }
-        joinAndCreateRoomEvent(roomName, userName, fn);
+        joinRoomEvent(roomName, userName, fn);
     };
 
     socket.on('create-room', createRoomEvent);
-    socket.on('join-room', joinAndCreateRoomEvent);
+    socket.on('join-room', (room,userName, fn) => {
+        userNames[socket.id] = userName;
+        joinRoomEvent(roomName, userName, fn);
+        joinRoomEvent();
+    });
     socket.on('is-name-taken', (name, fn) => {
         if(!io.sockets.adapter.rooms[name]){
             fn('available');

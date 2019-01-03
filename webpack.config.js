@@ -21,7 +21,7 @@ module.exports = {
             }
         ]
     },
-    devtool: "inline-source-map",
+    devtool: process.env.NODE_ENV == "development" ? "inline-source-map" : 'none',
     plugins: [
         new HtmlWebpackPlugin({
             template: './src/index.html'
