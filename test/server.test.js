@@ -21,5 +21,4 @@ describe('server', () => {
             expect(arr[i]).to.not.equal(i);
         }
     });
-
 });

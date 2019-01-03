@@ -32,7 +32,6 @@ socket.on('assign-recipient', (recipient) => {
 });
 const isAvailable = (name, f) => { socket.emit('is-name-taken', name, f); }
 socket.on('set-participants', (participants) => {
-    console.log('set-pa', participants);
     store.dispatch({type: 'SET_PARTICIPANTS', participants});
 })
 const contentDiv = document.getElementById('content');

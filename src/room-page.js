@@ -9,26 +9,23 @@ export default (store,assignRecipients, navigate) => customElements.define('room
     disconnectedCallback(){
         this._unsubscribe && this._unsubscribe();
     }
-    _updateRendering({admin, recipient,participants, roomName}){
+    _updateRendering({admin, recipient,participants, roomName, userName}){
         this.innerHTML = `
         <h1 class="heading">Secret santa - room</h1>
         <div class="container">
         <div>Room name: ${roomName}</div>
+        <div>Your name: ${userName}</div>
         ${admin ? `<h2 class="subheading">Participants</h2>
         <ul>
             ${participants && participants.map(({userName}) => `<li>${userName}</li>`).join('')  || ''}
         </ul>` : !recipient ? `<h2 class="message">Waiting for admin to assign a recipient for you</h2>` : ''}
-        ${admin && !recipient && '<button class="button" id="assign">Assign</button>' || ''}
+        ${admin && `<button class="button" id="assign">${!recipient ? 'Assign' : 'Reassign'}</button>` || ''}
         ${recipient && `<h2 class="message">You are making presents for <strong>${recipient}</strong></h2>` || ''}
         </div>
         <a href="#/"> Go back to main page</a>
         `;
         this.querySelector('#assign') && this.querySelector('#assign').addEventListener('click', () => {
-            if(this.isLoading) return;
-            this.isLoading = true;
-            assignRecipients(() => {
-                this.isLoading = false;
-            });
+            assignRecipients(() => {});
         });
     }
 });

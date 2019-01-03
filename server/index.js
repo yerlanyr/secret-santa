@@ -31,10 +31,9 @@ io.on('connection', (socket) => {
     };
 
     socket.on('create-room', createRoomEvent);
-    socket.on('join-room', (room,userName, fn) => {
+    socket.on('join-room', (roomName, userName, fn) => {
         userNames[socket.id] = userName;
         joinRoomEvent(roomName, userName, fn);
-        joinRoomEvent();
     });
     socket.on('is-name-taken', (name, fn) => {
         if(!io.sockets.adapter.rooms[name]){
