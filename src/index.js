@@ -4,18 +4,10 @@ import mainPage from './main-page';
 import createRoom from './create-room';
 import roomPage from './room-page';
 import joinRoom from './join-room';
-import io from 'socket.io-client';
+import io from 'socket.io-client'; 
 import {createStore} from 'redux';
 let defaultState = {};
-if(process.env.NODE_ENV === 'development'){
-   /* defaultState = {
-        participants: [{userName:'user'},{userName:'user1'}],
-        //roomName: 'myRoom',
-        userName: 'mariko',
-        recipient: 'Indira',
-        admin: false
-    };*/
-}
+
 const store = createStore((state = defaultState, action) => {
     switch(action.type){
         case 'SET_PARTICIPANTS': return {...state, participants: action.participants};
