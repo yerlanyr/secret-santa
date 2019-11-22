@@ -6,26 +6,32 @@ import roomPage from './room-page';
 import joinRoom from './join-room';
 import io from 'socket.io-client'; 
 import {createStore} from 'redux';
-let defaultState = {};
+let defaultState = {
+    room: {userNames: []}
+};
 
 const store = createStore((state = defaultState, action) => {
     switch(action.type){
-        case 'SET_PARTICIPANTS': return {...state, participants: action.participants};
+        case 'SET_ROOM': return {...state, room: action.room};
         case 'SET_ROOM_NAME': return {...state, roomName: action.roomName};
         case 'SET_USER_NAME': return {...state, userName: action.userName};
         case 'SET_ADMIN_TRUE': return {...state, admin: true};
         case 'SET_RECIPIENT': return {...state, recipient: action.recipient};
+        case 'EXIT_ROOM': return defaultState;
         default : return state;
     }
-},  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
+},
+    localStorage.getItem('redux') ? JSON.parse(localStorage.getItem('redux')) : undefined,
+    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+);
+store.subscribe(() => {
+    localStorage.setItem('redux', JSON.stringify(store.getState()));
+});
 const socket = io('/');
-socket.on('assign-recipient', (recipient) => {
-    store.dispatch({type: 'SET_RECIPIENT', recipient});
+socket.on('set-room', (room, f) => {
+    store.dispatch({type: 'SET_ROOM', room});
 });
 const isAvailable = (name, f) => { socket.emit('is-name-taken', name, f); }
-socket.on('set-participants', (participants) => {
-    store.dispatch({type: 'SET_PARTICIPANTS', participants});
-})
 const contentDiv = document.getElementById('content');
 const routes = {
     '/create' : '<create-room></create-room>',
@@ -38,18 +44,23 @@ router.initialize();
 const navigate = router.navigate.bind(router);
 
 const createRoomRequest = (roomName, userName) => {
-    socket.emit('create-room', roomName, userName, (data) => {
-        store.dispatch({type: 'SET_PARTICIPANTS', participants: data});
+    socket.emit('create-room', roomName, userName, (room) => {
+        if(room.error){
+            alert(room.error); return;
+        }
+        store.dispatch({type: 'SET_ROOM', room});
         store.dispatch({type: 'SET_ROOM_NAME', roomName});
         store.dispatch({type: 'SET_USER_NAME', userName});
-        store.dispatch({type: 'SET_ADMIN_TRUE'});
         navigate('/room');
     });
 }
 
 const joinRoomRequest = (roomName, userName) => {
-    socket.emit('join-room', roomName, userName, (data) => {
-        store.dispatch({type: 'SET_PARTICIPANTS', participants: data});
+    socket.emit('join-room', roomName, userName, (room) => {
+        if(room.error){
+            alert(room.error); return;
+        }
+        store.dispatch({type: 'SET_ROOM', room});
         store.dispatch({type: 'SET_ROOM_NAME', roomName});
         store.dispatch({type: 'SET_USER_NAME', userName});
         navigate('/room');

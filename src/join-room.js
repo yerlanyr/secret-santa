@@ -39,7 +39,7 @@ export default (navigate, joinRoom, store, isAvailable) => customElements.define
         let isNameTaken = false;
         this.querySelector('.invalid-input-alert').style.visibility = 'hidden';
         this.querySelector('#room-name').addEventListener('keyup', (evt) => {
-            isAvailable(this.querySelector('#room-name').value, answer => {
+            isAvailable(evt.target.value, answer => {
                 if(answer === "taken"){
                     this.querySelector('.invalid-input-alert').style.visibility = 'hidden';
                     isNameTaken = true;

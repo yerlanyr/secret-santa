@@ -1,7 +1,7 @@
 {
   "name": "secret-santa",
   "version": "1.0.0",
-  "description": "An app to do a secret santa\r Basically i'm gonna create an app using vanilla JS as possible using modern web components targeting only modern chrome browser.",
+  "description": "An app to do a secret santa\r Basically an app using vanilla JS using modern web components targeting only modern chrome browser.",
   "main": "index.js",
   "scripts": {
     "test": "mocha",
@@ -22,6 +22,7 @@
     "mocha": "^5.2.0",
     "raw-loader": "^1.0.0",
     "redux": "^4.0.1",
+    "redux-localstorage": "^0.4.1",
     "socket.io": "^2.2.0",
     "socket.io-client": "^2.2.0",
     "style-loader": "^0.23.1",

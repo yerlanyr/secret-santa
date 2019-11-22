@@ -9,23 +9,30 @@ export default (store,assignRecipients, navigate) => customElements.define('room
     disconnectedCallback(){
         this._unsubscribe && this._unsubscribe();
     }
-    _updateRendering({admin, recipient,participants, roomName, userName}){
+    _updateRendering({room, roomName, userName}){
+        const participants = room.userNames;
+        const admin = room.adminName === userName;
+        const recipient = room.generatedIndexes ? room.userNames[room.generatedIndexes[room.userNames.indexOf(userName)]] : undefined;
         this.innerHTML = `
         <h1 class="heading">Secret santa - room</h1>
         <div class="container">
         <div>Room name: ${roomName}</div>
         <div>Your name: ${userName}</div>
-        ${admin ? `<h2 class="subheading">Participants</h2>
+        <h2 class="subheading">Participants</h2>
         <ul>
-            ${participants && participants.map(({userName}) => `<li>${userName}</li>`).join('')  || ''}
-        </ul>` : !recipient ? `<h2 class="message">Waiting for admin to assign a recipient for you</h2>` : ''}
-        ${admin && `<button class="button" id="assign">${!recipient ? 'Assign' : 'Reassign'}</button>` || ''}
+            ${participants && participants.map(userName => userName === room.adminName ? `<li><i>${userName}</i></li>` : `<li>${userName}</li>`).join('')}
+        </ul>
+        ${admin && !recipient ? `<button class="button" id="assign"> Assign </button>`: ''}
         ${recipient && `<h2 class="message">You are making presents for <strong>${recipient}</strong></h2>` || ''}
         </div>
         <a href="#/"> Go back to main page</a>
         `;
         this.querySelector('#assign') && this.querySelector('#assign').addEventListener('click', () => {
-            assignRecipients(() => {});
+            assignRecipients((room) => {
+                if(room.error){
+                    alert(room.error); return;
+                }
+            });
         });
     }
 });

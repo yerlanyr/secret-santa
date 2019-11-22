@@ -15,7 +15,7 @@ export default (navigate, store) => customElements.define('main-page', class ext
         this.innerHTML = `
         <h1 class="heading">Secret santa</h1>
         <div class="main-page--buttons">
-        ${roomName ? `<button class="button enter-room">enter room</button>`: `<button class="button create">create</button>
+        ${roomName ? `<button class="button enter-room">enter room</button><button class="button exit-room">exit room</button>`: `<button class="button create">create</button>
         <button class="button join">join</button>`}
     </div>
         `;
@@ -27,6 +27,9 @@ export default (navigate, store) => customElements.define('main-page', class ext
         });
         this._click('.enter-room', () => {
             navigate('/room');
+        })
+        this._click('.exit-room', () => {
+            store.dispatch({type: 'EXIT_ROOM'});
         })
     }
 });
