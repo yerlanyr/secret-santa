@@ -28,6 +28,11 @@ store.subscribe(() => {
     localStorage.setItem('redux', JSON.stringify(store.getState()));
 });
 const socket = io('/');
+if(store.getState().roomName){
+    socket.emit('get-room', store.getState().roomName, (room) => {
+        store.dispatch({type: 'SET_ROOM', room});
+    });
+}
 socket.on('set-room', (room, f) => {
     store.dispatch({type: 'SET_ROOM', room});
 });

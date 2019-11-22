@@ -7,10 +7,9 @@ const io = require('socket.io')(http);
 app.use(express.static(path.resolve(__dirname, 'public')));
 const rooms = {};
 const createNewRoom = (adminName) => ({createDate: new Date(), adminName, userNames: [], generatedIndexes: undefined});
-const isTaken = (roomName) => io.sockets.adapter.rooms[roomName] || rooms[roomName] && (new Date().getTime() - rooms[roomName].createDate.getTime()) > 24 * 60 * 60 * 1000;
+const isTaken = (roomName) => io.sockets.adapter.rooms[roomName] || rooms[roomName] && (new Date().getTime() - rooms[roomName].createDate.getTime()) <= 24 * 60 * 60 * 1000;
 
 io.on('connection', (socket) => {
-    
     const joinRoomEvent = (roomName, userName, fno) => {
         if(!rooms[roomName]) { fno({error: 'No such room'}); return; }
         if(rooms[roomName].generatedIndexes && !rooms[roomName].userNames.includes(userName)) 
@@ -34,6 +33,12 @@ io.on('connection', (socket) => {
     });
 
     socket.on('join-room', joinRoomEvent);
+    socket.on('get-room', (roomName, fn) => {
+        if(isTaken(roomName))
+            fn(rooms[roomName]);
+        else
+            fn({error: 'There is no such room'});
+    });
 
     socket.on('is-name-taken', (roomName, fn) => {
         fn( isTaken(roomName) ? 'taken' : 'available');
