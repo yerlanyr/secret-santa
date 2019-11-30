@@ -1,13 +1,16 @@
+import {createStore} from 'redux';
+import io from 'socket.io-client'; 
 import './style.css';
 import Router from './routing';
 import mainPage from './main-page';
 import createRoom from './create-room';
 import roomPage from './room-page';
 import joinRoom from './join-room';
-import io from 'socket.io-client'; 
-import {createStore} from 'redux';
+import langs from './langs';
+
 let defaultState = {
-    room: {userNames: []}
+    room: {userNames: []},
+    lang: navigator.language.includes('en') ? 'en' : 'ru'
 };
 
 const store = createStore((state = defaultState, action) => {
@@ -18,6 +21,7 @@ const store = createStore((state = defaultState, action) => {
         case 'SET_ADMIN_TRUE': return {...state, admin: true};
         case 'SET_RECIPIENT': return {...state, recipient: action.recipient};
         case 'EXIT_ROOM': return defaultState;
+        case 'SET_LANG': return {...state, lang: action.payload};
         default : return state;
     }
 },
@@ -75,7 +79,9 @@ const assignRecipients = (f) => {
     socket.emit('assign-recipients', store.getState().roomName, f);
 };
 
+
 mainPage(navigate, store);
 createRoom(navigate, createRoomRequest, isAvailable, store);
 roomPage(store, assignRecipients, navigate);
 joinRoom(navigate, joinRoomRequest, store, isAvailable);
+langs(store);

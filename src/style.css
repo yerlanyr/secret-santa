@@ -1,5 +1,5 @@
 .heading{
-    font-family: 'Dancing Script', cursive;
+    font-family:  'Bad Script', cursive;
     font-size: 60px;
     text-align: center;
 }
@@ -8,7 +8,7 @@
     word-spacing: 10px;
 }
 body{
-    font-family: 'Raleway', sans-serif;
+    font-family: 'Montserrat', sans-serif;
     font-size: 16px;
     box-sizing: border-box;
 }
@@ -16,7 +16,7 @@ body * {
     box-sizing: inherit;
 }
 .button{
-    font-family: 'Raleway', sans-serif;
+    font-family: 'Montserrat', sans-serif;
     font-size: 16px;
     padding: 10px 15px;
     border-radius: 3px;
@@ -25,7 +25,7 @@ body * {
     margin-right: 10px;
 }
 .input{
-    font-family: 'Raleway', sans-serif;
+    font-family: 'Montserrat', sans-serif;
     font-size: 16px;
     padding: 10px 15px;
     border: 1px solid silver;
@@ -44,17 +44,26 @@ body * {
     margin: 0 auto;
 }
 .subheading{
-    font-family: 'Dancing Script', cursive;
+    font-family: 'Bad Script', cursive;
     border-bottom: 1px solid rgba(137, 43, 226, 0.425);
 }
 .message{
     background: rgba(146, 175, 146, 0.479);
     padding: 10px 15px;
-    font-family: 'Dancing Script', cursive;
+    font-family: 'Bad Script', cursive;
     text-align: center;
 }
 .invalid-input-alert{
     color: red;
     display: inline-block;
     font-size: .8em;
+}
+.langs{
+    text-align: center;
+}
+.langs--link{
+    margin-right: 20px;
+}
+.langs--link_active{
+    text-decoration: underline;
 }

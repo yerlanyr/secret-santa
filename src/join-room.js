@@ -1,21 +1,23 @@
+import { i18n, SECRET_SANTA, JOIN_ROOM, ROOM_NAME, THERE_IS_NO_SUCH_ROOM, YOUR_NAME, GO_BACK_TO_MAIN_PAGE } from './resources';
 export default (navigate, joinRoom, store, isAvailable) => customElements.define('join-room', class extends HTMLElement {
     connectedCallback(){
+        this.lang = store.getState().lang;
         this._updateRendering();
     }
     _updateRendering(){
-        this.innerHTML = `<h1 class="heading">Secret santa - join room</h1>
+        this.innerHTML = `<h1 class="heading">${i18n(this.lang, SECRET_SANTA)} - ${i18n(this.lang, JOIN_ROOM)}</h1>
         <form class="form">
         <table class="form--table">
         <tr>
-        <td><label for="room-name">Room name: </label>
+        <td><label for="room-name">${i18n(this.lang, ROOM_NAME)}: </label>
         </td>
         <td><input type="text" id="room-name" class="input room-name"/>
         <br>
-        <span class="invalid-input-alert">There is no such room</span>
+        <span class="invalid-input-alert">${i18n(this.lang, THERE_IS_NO_SUCH_ROOM)}</span>
         </td>
         </tr>
         <tr>
-        <td><label for="your-name">Your name: </label>
+        <td><label for="your-name">${i18n(this.lang, YOUR_NAME)}: </label>
         </td>
         <td><input type="text" id="your-name" class="input your-name"/>
         </td>
@@ -23,14 +25,14 @@ export default (navigate, joinRoom, store, isAvailable) => customElements.define
         <tr>
         <td>
         </td>
-        <td><input type="submit" class="button" value="Join room"/>
+        <td><input type="submit" class="button" value="${i18n(this.lang, JOIN_ROOM)}"/>
         </td>
         </tr>
         </table>
         <br/>
         
         </form>
-        <a href="#/"> Go back to main page</a>
+        <a href="#/">${i18n(this.lang, GO_BACK_TO_MAIN_PAGE)}</a>
         `;
         this.querySelector('.form').addEventListener('submit', (evt) => {
             joinRoom(this.querySelector('.room-name').value, this.querySelector('.your-name').value);
