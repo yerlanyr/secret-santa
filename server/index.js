@@ -11,6 +11,8 @@ const isTaken = (roomName) => io.sockets.adapter.rooms[roomName] || rooms[roomNa
 
 io.on('connection', (socket) => {
     const joinRoomEvent = (roomName, userName, fno) => {
+        roomName = roomName.trim();
+        userName = userName.trim();
         if(!rooms[roomName]) { fno({error: 'No such room'}); return; }
         if(rooms[roomName].generatedIndexes && !rooms[roomName].userNames.includes(userName)) 
         { fno({ error: 'Recipients already were assigned, sorry you are late' }); return; }
@@ -24,6 +26,8 @@ io.on('connection', (socket) => {
     };
 
     socket.on('create-room', (roomName, userName, fn) => {
+        roomName = roomName.trim();
+        userName = userName.trim();
         if(isTaken(roomName)){
             fn({error: 'name has been taken'});
             return;
@@ -41,7 +45,7 @@ io.on('connection', (socket) => {
     });
 
     socket.on('is-name-taken', (roomName, fn) => {
-        fn( isTaken(roomName) ? 'taken' : 'available');
+        fn( isTaken(roomName.trim()) ? 'taken' : 'available');
     });
 
     socket.on('assign-recipients', (roomName, fn) =>{

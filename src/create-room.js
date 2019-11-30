@@ -38,7 +38,7 @@ export default (navigate, createRoom, isAvailable, store) => customElements.defi
         this.querySelector('.form').addEventListener('submit', (evt) => {
             evt.preventDefault();       
             if(isNameTaken) return;
-            createRoom(this.querySelector('#room-name').value, this.querySelector('#your-name').value);
+            createRoom(this.querySelector('#room-name').value.trim(), this.querySelector('#your-name').value.trim());
         });
         this.querySelector('.invalid-input-alert').style.visibility = 'hidden';
         this.querySelector('#room-name').addEventListener('keyup', (evt) => {

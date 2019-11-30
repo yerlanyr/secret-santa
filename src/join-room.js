@@ -35,13 +35,13 @@ export default (navigate, joinRoom, store, isAvailable) => customElements.define
         <a href="#/">${i18n(this.lang, GO_BACK_TO_MAIN_PAGE)}</a>
         `;
         this.querySelector('.form').addEventListener('submit', (evt) => {
-            joinRoom(this.querySelector('.room-name').value, this.querySelector('.your-name').value);
+            joinRoom(this.querySelector('.room-name').value.trim(), this.querySelector('.your-name').value.trim());
             evt.preventDefault();
         });
         let isNameTaken = false;
         this.querySelector('.invalid-input-alert').style.visibility = 'hidden';
         this.querySelector('#room-name').addEventListener('keyup', (evt) => {
-            isAvailable(evt.target.value, answer => {
+            isAvailable(evt.target.value.trim(), answer => {
                 if(answer === "taken"){
                     this.querySelector('.invalid-input-alert').style.visibility = 'hidden';
                     isNameTaken = true;
