@@ -1,6 +1,6 @@
 .heading{
     font-family:  'Bad Script', cursive;
-    font-size: 60px;
+    font-size: 30px;
     text-align: center;
 }
 .main-page--buttons{
@@ -23,6 +23,7 @@ body * {
     border-style:none;
     box-shadow: 0 2px 3px silver;
     margin-right: 10px;
+    margin-bottom: 12px;
 }
 .input{
     font-family: 'Montserrat', sans-serif;
@@ -33,7 +34,16 @@ body * {
 }
 .form{
     max-width: 370px;
+    min-width: auto;
     margin: 0 auto;
+}
+.form label{
+    display: inline-block;
+    padding-top: 5px;
+    padding-right: .5em;
+}
+.form--table td{
+    vertical-align: top;
 }
 .container{
     max-width: 400px;
