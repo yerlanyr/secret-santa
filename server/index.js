@@ -10,18 +10,18 @@ const createNewRoom = (adminName) => ({createDate: new Date(), adminName, userNa
 const isTaken = (roomName) => io.sockets.adapter.rooms[roomName] || rooms[roomName] && (new Date().getTime() - rooms[roomName].createDate.getTime()) <= 24 * 60 * 60 * 1000;
 
 io.on('connection', (socket) => {
-    const joinRoomEvent = (roomName, userName, fno) => {
+    const joinRoomEvent = (roomName, userName, fn) => {
         roomName = roomName.trim();
         userName = userName.trim();
-        if(!rooms[roomName]) { fno({error: 'No such room'}); return; }
+        if(!rooms[roomName]) { fn({error: 'No such room'}); return; }
         if(rooms[roomName].generatedIndexes && !rooms[roomName].userNames.includes(userName)) 
-        { fno({ error: 'Recipients already were assigned, sorry you are late' }); return; }
+        { fn({ error: 'Recipients already were assigned, sorry you are late' }); return; }
         socket.join(roomName, () => {
             if(!rooms[roomName].userNames.includes(userName)){
                 rooms[roomName].userNames.push(userName);
                 io.in(roomName).emit('set-room', rooms[roomName]);
             }
-            fno(rooms[roomName]);
+            fn(rooms[roomName]);
         });
     };
 
