@@ -10,7 +10,7 @@ module.exports = {
                 test: /\.css$/,
                 use: [
                     {loader: 'style-loader'},
-                    {loader: 'raw-loader'}
+                    {loader: 'css-loader'}
                 ]
             },
             {
@@ -21,7 +21,7 @@ module.exports = {
             }
         ]
     },
-    devtool: process.env.NODE_ENV == "development" ? "inline-source-map" : 'none',
+    devtool: process.env.NODE_ENV == "development" ? "inline-source-map" : 'nosources-source-map',
     plugins: [
         new HtmlWebpackPlugin({
             template: './src/index.html'
