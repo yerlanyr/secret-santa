@@ -1,5 +1,5 @@
 import {createStore} from 'redux';
-import io from 'socket.io-client'; 
+import { io } from 'socket.io-client'; 
 import './style.css';
 import Router from './routing';
 import mainPage from './main-page';

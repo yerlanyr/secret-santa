@@ -2,7 +2,9 @@ const express = require('express');
 const app = express();
 const http = require('http').Server(app);
 const path = require('path');
-const io = require('socket.io')(http);
+const { Server } = require('socket.io');
+
+const io = new Server(http)
 
 app.use(express.static(path.resolve(__dirname, 'public')));
 const rooms = {};
@@ -16,13 +18,13 @@ io.on('connection', (socket) => {
         if(!rooms[roomName]) { fn({error: 'No such room'}); return; }
         if(rooms[roomName].generatedIndexes && !rooms[roomName].userNames.includes(userName)) 
         { fn({ error: 'Recipients already were assigned, sorry you are late' }); return; }
-        socket.join(roomName, () => {
-            if(!rooms[roomName].userNames.includes(userName)){
-                rooms[roomName].userNames.push(userName);
-                io.in(roomName).emit('set-room', rooms[roomName]);
-            }
-            fn(rooms[roomName]);
-        });
+        socket.join(roomName)
+        
+        if(!rooms[roomName].userNames.includes(userName)){
+            rooms[roomName].userNames.push(userName);
+            io.in(roomName).emit('set-room', rooms[roomName]);
+        }
+        fn(rooms[roomName]);
     };
 
     socket.on('create-room', (roomName, userName, fn) => {
