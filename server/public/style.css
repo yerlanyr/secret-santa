@@ -1,0 +1,85 @@
+.heading{
+    font-family:  'Bad Script', cursive;
+    font-size: 30px;
+    text-align: center;
+}
+.main-page--buttons{
+    text-align: center;
+    word-spacing: 10px;
+}
+body{
+    font-family: 'Montserrat', sans-serif;
+    font-size: 16px;
+    box-sizing: border-box;
+}
+body * {
+    box-sizing: inherit;
+}
+.button{
+    font-family: 'Montserrat', sans-serif;
+    font-size: 16px;
+    padding: 10px 15px;
+    border-radius: 3px;
+    border-style:none;
+    box-shadow: 0 2px 3px silver;
+    margin-right: 10px;
+    margin-bottom: 12px;
+}
+a.button {
+    text-decoration: none;
+    color: inherit;
+}
+.input{
+    font-family: 'Montserrat', sans-serif;
+    font-size: 16px;
+    padding: 10px 15px;
+    border: 1px solid silver;
+    border-radius: 3px;
+}
+.form{
+    max-width: 370px;
+    min-width: auto;
+    margin: 0 auto;
+}
+.form label{
+    display: inline-block;
+    padding-top: 5px;
+    padding-right: .5em;
+}
+.form--table td{
+    vertical-align: top;
+}
+.container{
+    max-width: 400px;
+    margin: 0 auto;
+}
+#content{
+    max-width: 1200px;
+    margin: 0 auto;
+}
+.subheading{
+    font-family: 'Bad Script', cursive;
+    border-bottom: 1px solid rgba(137, 43, 226, 0.425);
+}
+.message{
+    background: rgba(146, 175, 146, 0.479);
+    padding: 10px 15px;
+    font-family: 'Bad Script', cursive;
+    text-align: center;
+}
+.invalid-input-alert{
+    color: red;
+    display: inline-block;
+    font-size: .8em;
+}
+.langs{
+    text-align: center;
+}
+.langs--link{
+    margin-right: 20px;
+    text-decoration: none;
+    color: inherit;
+}
+.langs--link_active{
+    text-decoration: underline;
+}

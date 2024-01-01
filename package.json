@@ -1,35 +1,33 @@
 {
   "name": "secret-santa",
   "version": "1.0.0",
-  "description": "An app to do a secret santa\r Basically an app using vanilla JS using modern web components targeting only modern chrome browser.",
+  "description": "An app to do a secret santa\r Basically an app using htmx with support of any browser.",
   "main": "index.js",
   "scripts": {
     "test": "mocha",
     "start": "npm run build & npm run start-server-heroku",
-    "start-dev": "webpack --config webpack.config.js --mode development --watch",
-    "start-prod": "npm run build & mocha & node server/index.js",
     "start-server-heroku": "node server/index.js",
     "start-server": "set DEBUG=express:* & node server/index.js",
-    "build": "webpack --config webpack.config.js --mode production"
+    "build": "babel --config-file ./babel.config.json --out-dir dist ./server && node -e \"require('fs').cpSync('./server/public/style.css', './dist/public/style.css')\"",
+    "clean": "node -e \"require('fs').rmSync('./dist', {force: true, recursive: true})\"",
+    "start-dev": "nodemon --exec babel-node server/index.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "chai": "^4.2.0",
-    "css-loader": "^6.8.1",
+    "@babel/node": "^7.22.19",
+    "@kitajs/html": "^3.0.10",
     "express": "^4.16.4",
-    "html-webpack-plugin": "^5.5.4",
-    "mocha": "^10.2.0",
+    "express-session": "^1.17.3",
     "raw-loader": "^4.0.2",
-    "redux": "^4.0.1",
     "socket.io": "^4.7.2",
-    "socket.io-client": "^4.7.2",
-    "style-loader": "^3.3.3",
-    "webpack": "^5.89.0",
-    "webpack-cli": "^5.1.4"
+    "socket.io-client": "^4.7.2"
   },
   "devDependencies": {
-    "webpack-dev-server": "^4.15.1"
+    "@babel/cli": "^7.23.4",
+    "@babel/core": "^7.23.6",
+    "@babel/preset-react": "^7.23.3",
+    "nodemon": "^3.0.2"
   }
 }
