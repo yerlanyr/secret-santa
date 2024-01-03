@@ -1,5 +1,5 @@
 function LangComponent({ lang }) {
-  return <div class="langs">
+  return <div class="langs" hx-boost="true">
     <a
       id="langs--link_ru"
       class={`langs--link ${lang == "ru" ? "langs--link_active" : ""}`}

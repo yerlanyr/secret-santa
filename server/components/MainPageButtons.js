@@ -1,7 +1,7 @@
 const { i18n, ENTER_ROOM, EXIT_ROOM, CREATE_ROOM } = require("../i18n");
 
 function MainPageButtons({ isLoggedIn, lang }) {
-  return <div class="main-page--buttons">
+  return <div hx-boost="true" class="main-page--buttons">
     {isLoggedIn ? (
       <>
         <a class="button enter-room" href={"/" + lang + "/room"}>

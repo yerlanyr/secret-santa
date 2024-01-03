@@ -8,7 +8,7 @@ function CreateRoom({ lang, roomIsTaken }) {
       <h1 class="heading">
         {i18n(lang, SECRET_SANTA)} - {i18n(lang, CREATE_ROOM).toLowerCase()}
       </h1>
-      <form class="form" method="POST" target="">
+      <form class="form" hx-post>
         <table class="form--table">
           <tr>
             <td>
@@ -21,7 +21,7 @@ function CreateRoom({ lang, roomIsTaken }) {
                 name="room-name"
                 class="input room-name"
                 hx-target="#room-is-taken-alert"
-                hx-trigger="change"
+                hx-trigger="change, keyup delay:300"
                 hx-post={`/${lang}/create-room`} />
               <br />
               <div id="room-is-taken-alert">
@@ -53,7 +53,7 @@ function CreateRoom({ lang, roomIsTaken }) {
         </table>
         <br />
       </form>
-      <a href="/">{i18n(lang, GO_BACK_TO_MAIN_PAGE)}</a>
+      <a href="/" hx-boost="true">{i18n(lang, GO_BACK_TO_MAIN_PAGE)}</a>
     </Layout>
   );
 }
