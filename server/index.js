@@ -9,15 +9,28 @@ const joinRoomRouter = require("./pages/joinRoom/router");
 
 const app = express();
 
+if(!process.env.SESSION_SECRET) {
+  if(process.env.NODE_ENV === 'production') {
+    throw Error('Session secret env variable is not set')
+  }
+  
+  console.warn('Session secret env variable is not set')
+  process.env.SESSION_SECRET = 'Default session secret'
+}
+
+
 app.use(express.static(__dirname + "/public"));
 app.use(
   session({
-    secret: "barbara straizand",
+    secret: process.env.SESSION_SECRET,
     httpOnly: true,
     secure: false,
     maxAge: null,
+    resave: false,
+    saveUninitialized: false
   })
 );
+
 const rooms = {};
 app.use((req, res, next) => {
   req.rooms = rooms;
@@ -33,7 +46,10 @@ app.use((req, res, next) => {
   });
   next();
 });
-app.use(express.urlencoded());
+
+app.use(express.urlencoded({
+  extended: false
+}));
 
 const appRouter = new Router();
 
