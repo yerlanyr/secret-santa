@@ -4,7 +4,6 @@
   "description": "An app to do a secret santa\r Basically an app using htmx with support of any browser.",
   "main": "index.js",
   "scripts": {
-    "test": "mocha",
     "start": "npm run build & npm run start-server-heroku",
     "start-server-heroku": "node server/index.js",
     "start-server": "set DEBUG=express:* & node server/index.js",
