@@ -1,4 +1,4 @@
-module.exports = ({ children }) => {
+module.exports = function Layout({ children }) {
   return (
     <>
       {"<!DOCTYPE html>"}
@@ -16,6 +16,7 @@ module.exports = ({ children }) => {
             integrity="sha384-QFjmbokDn2DjBjq+fM+8LUIVrAgqcNW2s0PjAxHETgRn9l4fvX31ZxDxvwQnyMOX"
             crossorigin="anonymous"
           ></script>
+          <script src="https://unpkg.com/htmx.org/dist/ext/sse.js"></script>
           <link
             href="https://fonts.googleapis.com/css?family=Bad+Script|Montserrat&display=swap&subset=cyrillic"
             rel="stylesheet"

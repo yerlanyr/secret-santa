@@ -2,6 +2,7 @@ require("@kitajs/html/register");
 const { RoomNotExistsAlert } = require("./RoomNotExistsAlert");
 const { Router } = require("express");
 const { JoinRoom } = require("./JoinRoom");
+const roomParticipantsUpdate = require("../../events/roomParticipantsUpdate");
 
 const joinRoomRouter = new Router()
 
@@ -33,6 +34,7 @@ joinRoomRouter.post("/join-room", (req, res) => {
   const userNames = room.userNames;
   if (!userNames.includes(userName)) {
     userNames.push(req.body["user-name"]);
+    roomParticipantsUpdate.emit(roomName)
   }
 
   res.set('HX-Location', '/' + lang + '/room')
