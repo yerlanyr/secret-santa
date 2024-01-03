@@ -61,7 +61,6 @@ roomRouter.get("/room/update-participants", (req, res) => {
 
   // If client closes connection, stop sending events
   res.on("close", () => {
-    console.log("2 client dropped me");
     roomParticipantsUpdate.removeListener(roomName, callback);
     res.end();
   });
@@ -88,9 +87,7 @@ roomRouter.get("/room/update-recipient", (req, res) => {
   };
   roomAssigned.addListener(roomName, callback);
 
-  // If client closes connection, stop sending events
   res.on("close", () => {
-    console.log("client dropped me");
     roomAssigned.removeListener(roomName, callback);
     res.end();
   });
@@ -136,7 +133,7 @@ roomRouter.get("/room", (req, res) => {
   const isLoggedIn = roomName !== undefined;
   const lang = req.lang;
 
-  if (!isLoggedIn || !(roomName in req.rooms)) {
+  if (!isLoggedIn || !(roomName in req.rooms) || req.rooms[roomName] === undefined) {
     res.redirect("/" + lang);
   }
 
@@ -175,6 +172,7 @@ roomRouter.get("/room", (req, res) => {
           sse-connect={"/" + lang + "/room/update-recipient"}
           sse-swap="message"
         >
+          <Recipient req={req} />
         </div>
       </div>
       <a hx-boost="true" href={"/" + lang + "/"}>

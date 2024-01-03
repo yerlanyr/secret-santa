@@ -24,6 +24,8 @@ const YOU_ARE_MAKING_PRESENTS_FOR = Symbol();
 exports.YOU_ARE_MAKING_PRESENTS_FOR = YOU_ARE_MAKING_PRESENTS_FOR;
 const ASSIGN = Symbol();
 exports.ASSIGN = ASSIGN;
+const THIS_ROOM_ALREADY_PLAYED_OUT = Symbol();
+exports.THIS_ROOM_ALREADY_PLAYED_OUT = THIS_ROOM_ALREADY_PLAYED_OUT
 
 const resources = {
   [SECRET_SANTA]: {
@@ -78,6 +80,10 @@ const resources = {
     en: "You are making presents for",
     ru: "Ты делаешь подарки для",
   },
+  [THIS_ROOM_ALREADY_PLAYED_OUT]: {
+    en: "This room already assigned Secret Santas, this user name is new",
+    ru: "Эта комната уже разыграла Секретного Санту, это имя пользователя новое"
+  }
 };
 
 exports.i18n = function i18n(lang, invariant) {

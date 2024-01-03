@@ -32,7 +32,12 @@ joinRoomRouter.post("/join-room", (req, res) => {
   req.session.roomName = roomName;
   const room = req.rooms[roomName];
   const userNames = room.userNames;
+  
   if (!userNames.includes(userName)) {
+    if(room.generatedIndexes) {
+      res.send(<JoinRoom lang={lang} isAssigned/>)
+      return
+    }
     userNames.push(req.body["user-name"]);
     roomParticipantsUpdate.emit(roomName)
   }

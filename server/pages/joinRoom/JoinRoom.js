@@ -6,15 +6,16 @@ const {
   ROOM_NAME,
   YOUR_NAME,
   GO_BACK_TO_MAIN_PAGE,
+  THIS_ROOM_ALREADY_PLAYED_OUT,
 } = require("../../i18n");
 
-const JoinRoom = ({ lang }) => {
+const JoinRoom = ({ lang, isAssigned }) => {
   return (
     <Layout>
       <h1 class="heading">
         {i18n(lang, SECRET_SANTA)} - {i18n(lang, JOIN_ROOM)}
       </h1>
-      <form class="form" hx-post>
+      <form class="form" hx-post hx-select="form">
         <table class="form--table">
           <tr>
             <td>
@@ -31,7 +32,9 @@ const JoinRoom = ({ lang }) => {
                 hx-post={`/${lang}/join-room/room-is-taken`}
               />
               <br />
-              <div id="room-is-taken-alert"></div>
+              <div id="room-is-taken-alert">
+              {isAssigned && i18n(lang, THIS_ROOM_ALREADY_PLAYED_OUT)}
+              </div>
             </td>
           </tr>
           <tr>
