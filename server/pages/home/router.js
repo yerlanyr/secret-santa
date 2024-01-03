@@ -1,8 +1,8 @@
 const { Router } = require("express");
-const { LangComponent } = require("../components/LangComponent");
-const Layout = require("../components/Layout");
-const { MainPageButtons } = require("../components/MainPageButtons");
-const { i18n, SECRET_SANTA } = require("../i18n");
+const { LangComponent } = require("./LangComponent");
+const Layout = require("../../components/Layout");
+const { MainPageButtons } = require("./MainPageButtons");
+const { i18n, SECRET_SANTA } = require("../../i18n");
 
 const homePageRouter = new Router()
 homePageRouter.get('/', (req, res) => {

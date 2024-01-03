@@ -1,4 +1,4 @@
-const { i18n, THERE_IS_NO_SUCH_ROOM } = require("../i18n");
+const { i18n, THERE_IS_NO_SUCH_ROOM } = require("../../i18n");
 
 function RoomNotExistsAlert({ lang }) {
   return (

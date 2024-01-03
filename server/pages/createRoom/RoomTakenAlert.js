@@ -1,4 +1,4 @@
-const { i18n, THIS_NAME_IS_TAKEN } = require("../i18n");
+const { i18n, THIS_NAME_IS_TAKEN } = require("../../i18n");
 
 function RoomTakenAlert({ lang }) {
   return (

@@ -2,10 +2,10 @@ const express = require("express");
 require("@kitajs/html/register");
 const session = require("express-session");
 const { Router } = require("express");
-const homePageRouter = require("./pages/home");
-const createRoomRouter = require("./pages/createRoom");
-const roomRouter = require("./pages/room");
-const joinRoomRouter = require("./pages/joinRoom");
+const homePageRouter = require("./pages/home/router");
+const createRoomRouter = require("./pages/createRoom/router");
+const roomRouter = require("./pages/room/router");
+const joinRoomRouter = require("./pages/joinRoom/router");
 
 const app = express();
 

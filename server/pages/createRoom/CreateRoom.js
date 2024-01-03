@@ -1,6 +1,6 @@
-const Layout = require("./Layout");
+const Layout = require("../../components/Layout");
+const { i18n, CREATE_ROOM, SECRET_SANTA, ROOM_NAME, YOUR_NAME, GO_BACK_TO_MAIN_PAGE } = require("../../i18n.js");
 const { RoomTakenAlert } = require("./RoomTakenAlert");
-const { i18n, CREATE_ROOM, SECRET_SANTA, ROOM_NAME, YOUR_NAME, GO_BACK_TO_MAIN_PAGE } = require("../i18n.js");
 
 function CreateRoom({ lang, roomIsTaken }) {
   return (

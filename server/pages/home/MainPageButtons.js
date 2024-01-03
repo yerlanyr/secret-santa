@@ -1,4 +1,4 @@
-const { i18n, ENTER_ROOM, EXIT_ROOM, CREATE_ROOM } = require("../i18n");
+const { i18n, ENTER_ROOM, EXIT_ROOM, CREATE_ROOM } = require("../../i18n");
 
 function MainPageButtons({ isLoggedIn, lang }) {
   return <div hx-boost="true" class="main-page--buttons">

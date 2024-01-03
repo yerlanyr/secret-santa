@@ -1,6 +1,6 @@
 const { Router } = require("express");
-const { RoomTakenAlert } = require("../components/RoomTakenAlert");
-const { CreateRoom } = require("../components/CreateRoom");
+const { RoomTakenAlert } = require("./RoomTakenAlert");
+const { CreateRoom } = require("./CreateRoom");
 
 const createRoomRouter = new Router()
 

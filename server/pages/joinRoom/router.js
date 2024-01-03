@@ -1,5 +1,5 @@
 require("@kitajs/html/register");
-const Layout = require("../components/Layout");
+const Layout = require("../../components/Layout");
 const {
   i18n,
   SECRET_SANTA,
@@ -7,8 +7,8 @@ const {
   ROOM_NAME,
   YOUR_NAME,
   GO_BACK_TO_MAIN_PAGE,
-} = require("../i18n");
-const { RoomNotExistsAlert } = require("../components/RoomNotExistsAlert");
+} = require("../../i18n");
+const { RoomNotExistsAlert } = require("./RoomNotExistsAlert");
 const { Router } = require("express");
 
 const joinRoomRouter = new Router()

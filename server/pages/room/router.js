@@ -1,4 +1,4 @@
-const Layout = require("../components/Layout");
+const Layout = require("../../components/Layout");
 const {
   i18n,
   SECRET_SANTA,
@@ -8,7 +8,7 @@ const {
   PARTICIPANTS,
   YOU_ARE_MAKING_PRESENTS_FOR,
   ASSIGN,
-} = require("../i18n");
+} = require("../../i18n");
 const { Router } = require("express");
 
 const roomRouter = new Router()
