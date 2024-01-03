@@ -6,9 +6,11 @@ const createRoomRouter = new Router()
 
 createRoomRouter.post('/create-room', (req, res) => {
   const lang = req.lang;
+  const roomName = req.body["user-name"].trim();
+  const userName = req.body["room-name"].trim();
 
   if (req.headers["hx-target"] === "room-is-taken-alert") {
-    if (req.isTaken(req.body["room-name"])) {
+    if (req.isTaken(roomName)) {
       res.send(<RoomTakenAlert lang={lang} />);
     } else {
       res.send("");
@@ -16,14 +18,14 @@ createRoomRouter.post('/create-room', (req, res) => {
     return;
   }
 
-  if (req.isTaken(req.body["room-name"])) {
+  if (req.isTaken(roomName)) {
     res.send(<CreateRoom lang={lang} roomIsTaken />);
     return;
   }
 
-  req.rooms[req.body["room-name"]] = req.createNewRoom(req.body["user-name"]);
-  req.session.userName = req.body["user-name"];
-  req.session.roomName = req.body["room-name"];
+  req.rooms[roomName] = req.createNewRoom(userName);
+  req.session.userName = roomName;
+  req.session.roomName = userName;
 
   res.set('HX-Location',  "/" + lang + "/room")
   res.send('');

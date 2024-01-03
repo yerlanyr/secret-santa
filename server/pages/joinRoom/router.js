@@ -15,24 +15,27 @@ const joinRoomRouter = new Router()
 
 joinRoomRouter.post('/join-room/room-is-taken', (req, res) => {
   const lang = req.lang;
+  const roomName = req.body["room-name"].trim();
 
-  if (!req.isTaken(req.body["room-name"])) {
+  if (!req.isTaken(roomName)) {
     res.send(<RoomNotExistsAlert lang={lang} />);
+    return;
   }
+  res.send('')
   return;
 })
 
 joinRoomRouter.post("/join-room", (req, res) => {
   const lang = req.lang;
+  const roomName = req.body["room-name"].trim();
+  const userName = req.body["user-name"].trim();
 
-  if (!(req.body["room-name"] in req.rooms)) {
+  if (!(roomName in req.rooms)) {
     res.send(<JoinRoom lang={lang} />);
     return;
   }
 
-  const userName = req.body["user-name"];
   req.session.userName = userName;
-  const roomName = req.body["room-name"];
   req.session.roomName = roomName;
   const room = req.rooms[roomName];
   const userNames = room.userNames;

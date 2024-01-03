@@ -4,12 +4,9 @@
   "description": "An app to do a secret santa\r Basically an app using htmx with support of any browser.",
   "main": "index.js",
   "scripts": {
-    "start": "npm run build & npm run start-server-heroku",
-    "start-server-heroku": "node server/index.js",
-    "start-server": "set DEBUG=express:* & node server/index.js",
     "build": "babel --config-file ./babel.config.json --out-dir dist ./server && node -e \"require('fs').cpSync('./server/public/style.css', './dist/public/style.css')\"",
     "clean": "node -e \"require('fs').rmSync('./dist', {force: true, recursive: true})\"",
-    "start-dev": "nodemon --exec babel-node server/index.js"
+    "dev": "nodemon --exec babel-node server/index.js"
   },
   "keywords": [],
   "author": "",
