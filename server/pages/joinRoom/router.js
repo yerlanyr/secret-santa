@@ -23,14 +23,16 @@ joinRoomRouter.post("/join-room", (req, res) => {
   const roomName = req.body["room-name"].trim();
   const userName = req.body["user-name"].trim();
 
-  if (!(roomName in req.rooms)) {
+  const room = req.rooms.get(roomName);
+  if (!(room)) {
     res.send(<JoinRoom lang={lang} />);
     return;
   }
 
+  console.log(room)
+
   req.session.userName = userName;
   req.session.roomName = roomName;
-  const room = req.rooms[roomName];
   const userNames = room.userNames;
   
   if (!userNames.includes(userName)) {
@@ -39,6 +41,7 @@ joinRoomRouter.post("/join-room", (req, res) => {
       return
     }
     userNames.push(req.body["user-name"]);
+    req.rooms.set(roomName, room)
     roomParticipantsUpdate.emit(roomName)
   }
 

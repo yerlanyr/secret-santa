@@ -20,7 +20,7 @@ roomRouter.post("/room/assign", (req, res) => {
   const roomName = req.session.roomName;
   const isLoggedIn = roomName !== undefined;
 
-  if (!isLoggedIn || !(roomName in req.rooms)) {
+  if (!isLoggedIn || !(req.rooms.get(roomName))) {
     res.redirect("/" + lang);
   }
   const generate = function (n) {
@@ -34,9 +34,11 @@ roomRouter.post("/room/assign", (req, res) => {
     }
     return arr;
   };
-  req.rooms[roomName].generatedIndexes = generate(
-    req.rooms[roomName].userNames.length
+  const room = req.rooms.get(roomName)
+  room.generatedIndexes = generate(
+    room.userNames.length
   );
+  req.rooms.set(roomName, room)
   roomAssigned.emit(roomName);
   res.send("");
 });
@@ -67,7 +69,7 @@ roomRouter.get("/room/update-participants", (req, res) => {
 });
 
 roomRouter.get("/room/update-recipient", (req, res) => {
-  if (!req.rooms[req.session.roomName]) {
+  if (!req.rooms.get(req.session.roomName)) {
     res.send("");
     return;
   }
@@ -95,7 +97,7 @@ roomRouter.get("/room/update-recipient", (req, res) => {
 
 function Recipient({req}) {
   const roomName = req.session.roomName;
-  const room = req.rooms[roomName];
+  const room = req.rooms.get(roomName);
   const participants = room.userNames;
   const userName = req.session.userName;
   let recipient;
@@ -114,7 +116,7 @@ function Recipient({req}) {
 
 function ParticipantListItems({req}) {
   const roomName = req.session.roomName;
-  const room = req.rooms[roomName];
+  const room = req.rooms.get(roomName);
   const participants = room.userNames;
   return <>{(participants ?? []).map((userName) =>
     userName === room.adminName ? (
@@ -132,12 +134,11 @@ roomRouter.get("/room", (req, res) => {
   const roomName = req.session.roomName;
   const isLoggedIn = roomName !== undefined;
   const lang = req.lang;
-
-  if (!isLoggedIn || !(roomName in req.rooms) || req.rooms[roomName] === undefined) {
+  const room = req.rooms.get(roomName)
+  if (!isLoggedIn || !room) {
     res.redirect("/" + lang);
   }
 
-  const room = req.rooms[req.session.roomName];
   const userName = req.session.userName;
   const admin = room.adminName === userName;
 
