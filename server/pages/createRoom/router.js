@@ -26,7 +26,6 @@ createRoomRouter.post('/create-room', (req, res) => {
   req.rooms[roomName] = req.createNewRoom(userName);
   req.session.userName = roomName;
   req.session.roomName = userName;
-
   res.set('HX-Location',  "/" + lang + "/room")
   res.send('');
 });
