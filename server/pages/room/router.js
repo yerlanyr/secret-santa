@@ -109,7 +109,7 @@ function Recipient({req}) {
   return !!recipient && (
     <h2 class="message">
       {i18n(req.lang, YOU_ARE_MAKING_PRESENTS_FOR)}{" "}
-      <strong>{recipient}</strong>
+      <strong safe>{recipient}</strong>
     </h2>
   )
 }
@@ -121,10 +121,10 @@ function ParticipantListItems({req}) {
   return <>{(participants ?? []).map((userName) =>
     userName === room.adminName ? (
       <li>
-        <i>{userName}</i>
+        <i safe>{userName}</i>
       </li>
     ) : (
-      <li>{userName}</li>
+      <li safe>{userName}</li>
     )
   )}
   </>
@@ -144,11 +144,11 @@ roomRouter.get("/room", (req, res) => {
 
   res.send(
     <Layout>
-      <h1 class="heading">
+      <h1 class="heading" safe>
         {i18n(lang, SECRET_SANTA)} - {i18n(lang, ROOM_NAME)} : {roomName}
       </h1>
       <div class="container">
-        <div>
+        <div safe>
           {i18n(lang, YOUR_NAME)}: {userName}
         </div>
         <h2 class="subheading">{i18n(lang, PARTICIPANTS)}</h2>
