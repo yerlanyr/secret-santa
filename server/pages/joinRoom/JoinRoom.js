@@ -15,7 +15,12 @@ const JoinRoom = ({ lang, isAssigned }) => {
       <h1 class="heading">
         {i18n(lang, SECRET_SANTA)} - {i18n(lang, JOIN_ROOM)}
       </h1>
-      <form class="form" hx-post hx-select="form">
+      <form
+        class="form"
+        hx-post
+        hx-swap="none"
+        hx-disabled-elt="input[type=submit]"
+      >
         <table class="form--table">
           <tr>
             <td>
@@ -28,12 +33,13 @@ const JoinRoom = ({ lang, isAssigned }) => {
                 name="room-name"
                 class="input room-name"
                 hx-target="#room-is-taken-alert"
-                hx-trigger="change, keyup delay:300"
+                hx-trigger="change, changed, keyup delay:300, consume"
+                hx-swap="innerHTML"
                 hx-post={`/${lang}/join-room/room-is-taken`}
               />
               <br />
               <div id="room-is-taken-alert">
-              {isAssigned && i18n(lang, THIS_ROOM_ALREADY_PLAYED_OUT)}
+                {isAssigned && i18n(lang, THIS_ROOM_ALREADY_PLAYED_OUT)}
               </div>
             </td>
           </tr>

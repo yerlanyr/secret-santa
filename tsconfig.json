@@ -1,0 +1,12 @@
+{
+  "include": ["server/**/*"],
+  "exclude": ["node_modules/"],
+  "compilerOptions": {
+    "jsx": "react",
+    "allowJs": true,
+    "noEmit": true,
+    "jsxFactory": "Html.createElement",
+    "jsxFragmentFactory": "Html.Fragment",
+    "plugins": [{ "name": "@kitajs/ts-html-plugin" }]
+  }
+}

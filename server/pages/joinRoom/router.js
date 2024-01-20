@@ -25,7 +25,7 @@ joinRoomRouter.post("/join-room", (req, res) => {
 
   const room = req.rooms.get(roomName);
   if (!(room)) {
-    res.send(<JoinRoom lang={lang} />);
+    res.send(<JoinRoom lang={lang} isAssigned />);
     return;
   }
 

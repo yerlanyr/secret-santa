@@ -151,7 +151,7 @@ roomRouter.get("/room", (req, res) => {
         <div safe>
           {i18n(lang, YOUR_NAME)}: {userName}
         </div>
-        <h2 class="subheading">{i18n(lang, PARTICIPANTS)}</h2>
+        <h2 class="subheading" safe>{i18n(lang, PARTICIPANTS)}</h2>
         <ul
           hx-ext="sse"
           sse-connect={"/" + lang + "/room/update-participants"}
@@ -164,6 +164,7 @@ roomRouter.get("/room", (req, res) => {
             class="button"
             hx-post={"/" + lang + "/room/assign"}
             hx-swap="outerHTML"
+            safe
           >
             {i18n(lang, ASSIGN)}
           </button>
@@ -176,7 +177,7 @@ roomRouter.get("/room", (req, res) => {
           <Recipient req={req} />
         </div>
       </div>
-      <a hx-boost="true" href={"/" + lang + "/"}>
+      <a hx-boost="true" href={"/" + lang + "/"} safe>
         {i18n(lang, GO_BACK_TO_MAIN_PAGE)}
       </a>
     </Layout>
