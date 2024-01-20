@@ -8,7 +8,7 @@ function CreateRoom({ lang, roomIsTaken }) {
       <h1 class="heading">
         {i18n(lang, SECRET_SANTA)} - {i18n(lang, CREATE_ROOM).toLowerCase()}
       </h1>
-      <form class="form" hx-post>
+      <form class="form" hx-post hx-select=".form">
         <table class="form--table">
           <tr>
             <td>
@@ -25,7 +25,7 @@ function CreateRoom({ lang, roomIsTaken }) {
                 hx-post={`/${lang}/create-room`} />
               <br />
               <div id="room-is-taken-alert">
-                {roomIsTaken && <RoomTakenAlert />}
+                {roomIsTaken && <RoomTakenAlert lang={lang}/>}
               </div>
             </td>
           </tr>

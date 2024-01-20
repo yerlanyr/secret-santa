@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "build": "babel --config-file ./babel.config.json --out-dir dist ./server && node -e \"require('fs').cpSync('./server/public/style.css', './dist/public/style.css')\"",
-    "clean": "node -e \"require('fs').rmSync('./dist', {force: true, recursive: true})\"",
+    "clean": "node -e \"require('fs').rmSync('./dist', {force: true, recursive: true}); require('fs').rmSync('./rooms.db', {force: true, recursive: true}); require('fs').rmSync('./sessions.db', {force: true, recursive: true})\"",
     "dev": "nodemon --exec babel-node server/index.js",
     "prod": "node dist/index.js"
   },

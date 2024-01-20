@@ -29,8 +29,6 @@ joinRoomRouter.post("/join-room", (req, res) => {
     return;
   }
 
-  console.log(room)
-
   req.session.userName = userName;
   req.session.roomName = roomName;
   const userNames = room.userNames;

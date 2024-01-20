@@ -6,7 +6,6 @@ const homePageRouter = require("./pages/home/router");
 const createRoomRouter = require("./pages/createRoom/router");
 const roomRouter = require("./pages/room/router");
 const joinRoomRouter = require("./pages/joinRoom/router");
-const { MemoryStore } = require("express-session");
 const SqliteStore = require('better-sqlite3-session-store')(session)
 
 require("@kitajs/html/register");
